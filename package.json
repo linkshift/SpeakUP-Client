@@ -1,0 +1,31 @@
+{
+	"name": "SpeakUP-Client-Electron",
+	"version": "1.0.0",
+	"description": "Peer-2-peer videoconferences",
+	"main": "main.js",
+	"scripts": {
+		"start": "electron main.js"
+	},
+	"keywords": [
+		"SpeakUP",
+		"video",
+		"videoconference",
+		"call"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/linkshift/SpeakUP-Client.git"
+	},
+	"author": "LinkSoft",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/linkshift/SpeakUP-Client/issues"
+	},
+	"homepage": "https://linksoft.cf/",
+	"dependencies": {
+		"electron-settings": "^0.1.0"
+	},
+	"devDependencies": {
+		"electron-prebuilt": "^0.36.0"
+	}
+}
