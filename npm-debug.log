@@ -1,0 +1,45 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'D:\\Programs\\NodeJS\\node.exe',
+1 verbose cli   'D:\\Programs\\NodeJS\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'start' ]
+2 info using npm@3.3.12
+3 info using node@v5.4.1
+4 verbose run-script [ 'prestart', 'start', 'poststart' ]
+5 info lifecycle SpeakUP-Client-Electron@1.0.0~prestart: SpeakUP-Client-Electron@1.0.0
+6 silly lifecycle SpeakUP-Client-Electron@1.0.0~prestart: no script for prestart, continuing
+7 info lifecycle SpeakUP-Client-Electron@1.0.0~start: SpeakUP-Client-Electron@1.0.0
+8 verbose lifecycle SpeakUP-Client-Electron@1.0.0~start: unsafe-perm in lifecycle true
+9 verbose lifecycle SpeakUP-Client-Electron@1.0.0~start: PATH: D:\Programs\NodeJS\node_modules\npm\bin\node-gyp-bin;D:\Recycle Bin\Repositories\electron-quick-start\node_modules\.bin;D:\Programs\ConEmu;D:\Programs\ConEmu\ConEmu;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;D:\Programs\xampp\php\;D:\Dropbox\Trash\Scripts\;D:\Programs\ConEmu\;D:\Dropbox\Portable Apps\Livestreamer\;D:\Programs\GnuWin\bin\;D:\Programs\MPC-HC\;D:\Programs\FFmpeg\bin\;D:\Dropbox\Portable Apps\BIND\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;D:\Dropbox\Portable Apps\SysInternals\!Suite\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\7-Zip\;D:\Programs\Ruby\bin\;D:\Dropbox\Portable Apps\jPortable\bin;D:\Programs\xampp\imagemagick;C:\Program Files\Git\cmd;C:\Program Files\Git\usr\bin;C:\Program Files (x86)\Skype\Phone\;D:\Programs\NodeJS\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\Bitvise SSH Client;C:\Users\LinkShift\AppData\Local\atom\bin;C:\Users\LinkShift\AppData\Roaming\npm
+10 verbose lifecycle SpeakUP-Client-Electron@1.0.0~start: CWD: D:\Recycle Bin\Repositories\electron-quick-start
+11 silly lifecycle SpeakUP-Client-Electron@1.0.0~start: Args: [ '/d /s /c', 'electron main.js' ]
+12 silly lifecycle SpeakUP-Client-Electron@1.0.0~start: Returned: code: 1  signal: null
+13 info lifecycle SpeakUP-Client-Electron@1.0.0~start: Failed to exec start script
+14 verbose stack Error: SpeakUP-Client-Electron@1.0.0 start: `electron main.js`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (D:\Programs\NodeJS\node_modules\npm\lib\utils\lifecycle.js:232:16)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at EventEmitter.emit (events.js:172:7)
+14 verbose stack     at ChildProcess.<anonymous> (D:\Programs\NodeJS\node_modules\npm\lib\utils\spawn.js:24:14)
+14 verbose stack     at emitTwo (events.js:87:13)
+14 verbose stack     at ChildProcess.emit (events.js:172:7)
+14 verbose stack     at maybeClose (internal/child_process.js:821:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+15 verbose pkgid SpeakUP-Client-Electron@1.0.0
+16 verbose cwd D:\Recycle Bin\Repositories\electron-quick-start
+17 error Windows_NT 6.1.7601
+18 error argv "D:\\Programs\\NodeJS\\node.exe" "D:\\Programs\\NodeJS\\node_modules\\npm\\bin\\npm-cli.js" "start"
+19 error node v5.4.1
+20 error npm  v3.3.12
+21 error code ELIFECYCLE
+22 error SpeakUP-Client-Electron@1.0.0 start: `electron main.js`
+22 error Exit status 1
+23 error Failed at the SpeakUP-Client-Electron@1.0.0 start script 'electron main.js'.
+23 error Make sure you have the latest version of node.js and npm installed.
+23 error If you do, this is most likely a problem with the SpeakUP-Client-Electron package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     electron main.js
+23 error You can get their info via:
+23 error     npm owner ls SpeakUP-Client-Electron
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

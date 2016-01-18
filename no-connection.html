@@ -1,8 +1,63 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<title>SpeakUP</title>
+	<style>
+		html {
+			font-family: Arial, Ubuntu, Helvetica, sans-serif;
+			min-height: 100%;
+			min-width: 100%;
+			box-sizing: border-box;
+		}
+
+		body {
+			background: #135 linear-gradient(#135, #246);
+		}
+
+		#messageBox {
+			background: #fff;
+			border: .01em solid #135;
+			padding: .5em;
+			margin: auto;
+			width: 95%;
+			max-width: 40em;
+			text-align: center;
+			border-radius: .5em;
+
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+
+		#messageBox button {
+			padding: .5em 2em;
+		}
+	</style>
+</head>
 <body>
-	<h1>SpeakUP</h1>
-	<p>Connection is unavailable at the moment.</p>
-	<p><a href='check-connection.html'>Try again</a></p>
+	<div id='messageBox'>
+		<h1>SpeakUP</h1>
+		<p id='messageText'>Connection is unavailable at the moment.</p>
+		<p><button id='retry'>Try again</button></p>
+	</div>
+
+	<script>
+		window.onload = function()
+		{
+			document.getElementById('retry').onclick = function() {
+				location.href = 'check-connection.html';
+				return false;
+			}
+
+			if (location.search && location.search.match(/errorText=([^&]*)/)) {
+				var match = location.search.match(/errorText=([^&]*)/);
+				if (match && match[1]) {
+					var errorText = match[1].replace(/\+/g, ' ');
+					document.getElementById('messageText').innerHTML = errorText;
+				}
+			}
+		}
+	</script>
 </body>
 </html>
