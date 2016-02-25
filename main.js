@@ -4,16 +4,20 @@ const electron = require('electron');
 const ipcMain = electron.ipcMain;
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
-const BrowserOptions = {'extraHeaders' : 'pragma: no-cache\n'}
+const BrowserOptions = {'extraHeaders' : 'pragma: no-cache\n'};
+const shell = require('electron').shell;
+const dialog = require('electron').dialog;
 
 let mainWindow;
 let ElectronSettings = require('electron-settings');
 let settings = new ElectronSettings();
 let callModeEnabled = false;
 
-function callModeEnable() {
-	// mainWindow
-}
+let Toaster = require('electron-toaster');
+let toaster = new Toaster();
+
+let Menu = require('menu');
+let MenuItem = require('menu-item');
 
 function createWindow() {
 	var winWidth = typeof settings.get('app.width') == 'undefined' ?
@@ -54,9 +58,76 @@ function createWindow() {
 	}
 
 	mainWindow = new BrowserWindow(defaultSettings);
+    toaster.init(mainWindow);
 
-	mainWindow.setMenuBarVisibility(false);
+	// mainWindow.setMenuBarVisibility(false);
+	var mainMenu = new Menu();
+	var mainSubMenu = new Menu();
+	
+	mainMenu.append(
+		new MenuItem({
+			label: 'SpeakUP',
+			type: 'submenu',
+			submenu: mainSubMenu
+		})
+	);
+	
+	mainSubMenu.append(
+		new MenuItem({
+			label: 'DevTools',
+			accelerator: (function() {
+				if (process.platform == 'darwin')
+					return 'Alt+Command+I';
+				else
+					return 'Ctrl+Shift+I';
+				})(),
+			click: function() {
+				mainWindow.webContents.openDevTools();
+			}
+		})
+	);
+	
+	mainSubMenu.append(
+		new MenuItem({
+			label: 'Reload',
+			accelerator: 'CmdOrCtrl+R',
+			click: function() {
+				mainWindow.webContents.reload();
+			}
+		})
+	);
+	
+	mainSubMenu.append(
+		new MenuItem({
+			label: 'Report Issue',
+			accelerator: 'CmdOrCtrl+H',
+			click: function() {
+				shell.openExternal('https://vk.com/speakupcf');
+			}
+		})
+	);
+	
+	mainWindow.setMenu(mainMenu);
 
+	mainWindow.on('close', function(e) {
+		if (callModeEnabled) {
+			var choice = dialog.showMessageBox(
+				mainWindow,
+				{
+					type: 'question',
+					buttons: ['Yes', 'No'],
+					defaultId: 0,
+					title: 'Confirm',
+					message: "You are currently in conference.\nDo you really want to close SpeakUP?"
+				}
+			);
+
+			if (choice !== 0) {
+				e.preventDefault();
+			}
+		}
+	});
+	
 	mainWindow.on('closed', function() {
 		mainWindow = null;
 	});
@@ -71,8 +142,6 @@ function createWindow() {
 
 	mainWindow.on('minimize', function() {
 		console.log('Window has been minimized', 'callModeEnabled: ', callModeEnabled);
-
-		e.returnValue = false;
 	});
 
 	mainWindow.on('restore', function() {
@@ -100,7 +169,6 @@ function createWindow() {
 	}
 
 	mainWindow.loadURL('file://' + __dirname + '/check-connection.html');
-	mainWindow.webContents.openDevTools();
 
 	var webContents = mainWindow.webContents;
 
@@ -119,6 +187,10 @@ app.on('window-all-closed', function () {
 app.on('activate', function () {
 	if (mainWindow === null) {
 		createWindow();
+		
+		var notification = new Notification('Notification title', {
+			body: "Hey there! You've been notified!",
+        });
 	}
 });
 
