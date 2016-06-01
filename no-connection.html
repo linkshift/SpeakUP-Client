@@ -32,13 +32,18 @@
 
 		#messageBox button {
 			padding: .5em 2em;
+			cursor: pointer;
+		}
+		
+		#logo img {
+			height: 50px;
 		}
 	</style>
 </head>
 <body>
 	<div id='messageBox'>
-		<h1>SpeakUP</h1>
-		<p id='messageText'>Connection is unavailable at the moment.</p>
+		<div id='logo'><img src='images/logo.png' alt='SpeakUP'></div>
+		<p id='messageText'>Internet connection is unavailable at the moment.</p>
 		<p><button id='retry'>Try again</button></p>
 	</div>
 

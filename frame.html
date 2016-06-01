@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SpeakUP</title>
+	<meta charset='utf-8' />
+	<style>
+		*, *:before, *:after {
+			box-sizing: border-box;
+		}
+		
+		html, body {
+			padding: 0;
+			margin: 0;
+			font-family: Arial, Ubuntu, sans;
+			font-size: 13pt;
+			line-height: 20pt;
+		}
+		
+		#topbar {
+			display: flex;
+			background: #135;
+			color: #fff;
+			vertical-align: middle;
+			-webkit-user-select: none;
+			cursor: pointer;
+			height: 28px;
+			border: 1px solid #579;
+			border-bottom: 0;
+		}
+		
+		#topbar-title {
+			width: 100%;
+			-webkit-app-region: drag;
+			margin: 0 7px;
+		}
+		
+		#topbar-controls {
+			display: flex;
+		}
+		
+		.topbar-button {
+			width: 30px;
+			border: 1px solid #456;
+			background: #357;
+			display: inline-block;
+			text-align: center;
+			transition: .1s background-color,border-color;
+			border-top: 0;
+		}
+		
+		#topbar-controls:last-child {
+			border-right: 0;
+		}
+		
+		.topbar-button:hover {
+			border-color: #789;
+			background: #579;
+		}
+		
+		#topbar-close {
+			background: #733;
+		}
+		
+		#topbar-close:hover {
+			background: #955;
+		}
+		
+		#speakup-webview {
+			border: 1px solid #579;
+			border-top: 0;
+			position: fixed;
+			top: 28px;
+			left: 0;
+			width: 100%;
+			height: calc(100% - 28px);
+		}
+	</style>
+</head>
+<body>
+	<div id='topbar'>
+		<div id='topbar-title'>SpeakUP</div>
+		<div id='topbar-controls'>
+			<div class='topbar-button' id='topbar-minimize'>_</div>
+			<div class='topbar-button' id='topbar-maximize'>□</div>
+			<div class='topbar-button' id='topbar-close'>x</div>
+		</div>
+	</div>
+	<webview id='speakup-webview' nodeintegration></webview>
+	<script>
+		var callModeEnabled = false;
+		
+		function setDocumentTitle(title) {
+			document.title = title;
+			document.getElementById('topbar-title').innerHTML = title;
+		}
+		
+		onload = () => {
+			const webview = document.getElementById('speakup-webview');
+			const {ipcRenderer, remote} = require('electron');
+			const {version} = require('./package.json');
+			var win = remote.getCurrentWindow();
+			setDocumentTitle('SpeakUP Client v' + version);
+			
+			webview.addEventListener('page-title-updated', (e, title, explicit) => {
+				setDocumentTitle(e.title);
+			});
+
+			document.getElementById('topbar-minimize').onclick = () => {
+				ipcRenderer.send('titlebar-minimize');
+			};
+			
+			document.getElementById('topbar-maximize').onclick = () => {
+				if (win.isMaximized()) {
+					win.unmaximize();
+				} else {
+					win.maximize();
+				}
+			};
+			
+			document.getElementById('topbar-close').onclick = () => {
+				win.close();
+			};
+			
+			ipcRenderer.on('call-mode-change-notify', function(e, status) {
+				callModeEnabled = status.enabled;
+				
+				if (!status.enabled) {
+					document.getElementById('topbar-minimize').innerHTML = '_';
+					document.getElementById('topbar-maximize').style.display = '';
+					document.getElementById('topbar-close').style.display = '';
+				}
+			});
+			
+			ipcRenderer.on('titlebar-change-notify', function(e, status) {
+				if (status.show) {
+					document.getElementById('topbar-minimize').innerHTML = '&uarr;';
+					document.getElementById('topbar-maximize').style.display = 'none';
+					document.getElementById('topbar-close').style.display = 'none';
+				} else {
+					document.getElementById('topbar-minimize').innerHTML = '_';
+					document.getElementById('topbar-maximize').style.display = '';
+					document.getElementById('topbar-close').style.display = '';
+				}
+			});
+			
+			var roomCheck = location.href.match(/\?room=([a-zA-Z0-9\-_]{1,40})/);
+			if (roomCheck && roomCheck[1]) {
+				webview.src = 'https://speakup.cf/room/' + roomCheck[1];
+			} else {
+				webview.src = 'https://speakup.cf/';
+			}
+		};
+	</script>
+</body>
+</html>

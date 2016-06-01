@@ -1,7 +1,7 @@
 {
-	"name": "SpeakUP-Client-Electron",
-	"version": "1.0.0",
-	"description": "Peer-2-peer videoconferences",
+	"name": "SpeakUP",
+	"version": "1.1.5",
+	"description": "Video Conferences and Direct Calls",
 	"main": "main.js",
 	"scripts": {
 		"start": "electron main.js"
@@ -23,9 +23,11 @@
 	},
 	"homepage": "https://linksoft.cf/",
 	"dependencies": {
-		"electron-settings": "^0.1.0"
+		"electron-settings": "^1.0.0"
 	},
 	"devDependencies": {
-		"electron-prebuilt": "^0.36.0"
+		"electron-prebuilt": "^1.0.0",
+		"electron-squirrel-startup": "^1.0.0",
+		"electron-winstaller": "^2.3.1"
 	}
 }

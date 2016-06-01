@@ -11,6 +11,10 @@
 		window.addEventListener('offline',  updateOnlineStatus);
 
 		updateOnlineStatus();
+		
+		setTimeout(function() {
+			location.href = 'no-connection.html';
+		}, 10000);
 	</script>
 </body>
 </html>
