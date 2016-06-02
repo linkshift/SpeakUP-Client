@@ -1,5 +1,5 @@
 node_modules
 start.lnk
 npm-debug.log
-!build.bat
-!build.js
+\!build.bat
+\!build.js
