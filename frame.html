@@ -101,7 +101,7 @@
 			var win = remote.getCurrentWindow();
 			setDocumentTitle('SpeakUP Client v' + version);
 			
-			webview.addEventListener('page-title-updated', (e, title, explicit) => {
+			webview.addEventListener('page-title-updated', (e) => {
 				setDocumentTitle(e.title);
 			});
 
@@ -121,7 +121,11 @@
 				win.close();
 			};
 			
-			ipcRenderer.on('call-mode-change-notify', function(e, status) {
+			ipcRenderer.on('open-devtools', (e) => {
+				webview.openDevTools();
+			});
+			
+			ipcRenderer.on('call-mode-change-notify', (e, status) => {
 				callModeEnabled = status.enabled;
 				
 				if (!status.enabled) {
@@ -131,7 +135,7 @@
 				}
 			});
 			
-			ipcRenderer.on('titlebar-change-notify', function(e, status) {
+			ipcRenderer.on('titlebar-change-notify', (e, status) => {
 				if (status.show) {
 					document.getElementById('topbar-minimize').innerHTML = '&uarr;';
 					document.getElementById('topbar-maximize').style.display = 'none';

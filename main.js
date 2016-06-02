@@ -162,7 +162,20 @@ function createWindow() {
         label: "Application",
         submenu: [
             {
-				label: "DevTools",
+				label: "DevTools [BrowserWindow]",
+				accelerator: (function() {
+					if (process.platform == 'darwin')
+						return 'Alt+Command+J';
+					else
+						return 'Ctrl+Shift+J';
+					})(),
+				click: function() {
+					console.log("Opening Browser Console");
+					mainWindow.webContents.openDevTools();
+				}
+			},
+            {
+				label: "DevTools [WebView]",
 				accelerator: (function() {
 					if (process.platform == 'darwin')
 						return 'Alt+Command+I';
@@ -170,7 +183,8 @@ function createWindow() {
 						return 'Ctrl+Shift+I';
 					})(),
 				click: function() {
-					mainWindow.webContents.openDevTools();
+					console.log("Opening WebView Console");
+					mainWindow.webContents.send('open-devtools', {});
 				}
 			},
             {
@@ -395,8 +409,8 @@ let MinimizationController = {
 		
 		activate: function() {
 			var newSize = {
-				w: 370,
-				h: 270
+				w: 340,
+				h: 220
 			}
 			
 			WebApp.allowSettingsSave = false;
