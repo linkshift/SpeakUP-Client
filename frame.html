@@ -32,6 +32,9 @@
 			width: 100%;
 			-webkit-app-region: drag;
 			margin: 0 7px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 		
 		#topbar-controls {
@@ -74,12 +77,17 @@
 			width: 100%;
 			height: calc(100% - 28px);
 		}
+		
+		#topbar-update {
+			display: none;
+		}
 	</style>
 </head>
 <body>
 	<div id='topbar'>
 		<div id='topbar-title'>SpeakUP</div>
 		<div id='topbar-controls'>
+			<div class='topbar-button' id='topbar-update' title='Update is downloading'>‼</div>
 			<div class='topbar-button' id='topbar-minimize'>_</div>
 			<div class='topbar-button' id='topbar-maximize'>□</div>
 			<div class='topbar-button' id='topbar-close'>x</div>
@@ -132,6 +140,15 @@
 					document.getElementById('topbar-minimize').innerHTML = '_';
 					document.getElementById('topbar-maximize').style.display = '';
 					document.getElementById('topbar-close').style.display = '';
+				}
+			});
+			
+			ipcRenderer.on('update-status', (e, data) => {
+				if (data.available) {
+					document.getElementById('topbar-update').style.display = '';
+					document.getElementById('topbar-update').title = data.text;
+				} else {
+					document.getElementById('topbar-update').style.display = 'none';
 				}
 			});
 			
