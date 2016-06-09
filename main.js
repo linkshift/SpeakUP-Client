@@ -492,7 +492,7 @@ ipcMain.on('titlebar-minimize', function(event) {
 	console.log('> callModeEnabled: ', WebApp.callModeEnabled);
 	console.log('> miniModeIsActive: ', MinimizationController.miniMode.isActive);
 	
-	if (WebApp.callModeEnabled) {
+	if (WebApp.callModeEnabled && WebApp.allowMiniMode) {
 		if (MinimizationController.miniMode.isActive) {
 			MinimizationController.miniMode.deactivate();
 		} else {
