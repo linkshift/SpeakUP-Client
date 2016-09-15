@@ -1,6 +1,6 @@
 {
 	"name": "SpeakUP",
-	"version": "1.1.10",
+	"version": "1.1.14",
 	"description": "Video Conferences and Direct Calls",
 	"main": "main.js",
 	"scripts": {
@@ -21,7 +21,7 @@
 	"bugs": {
 		"url": "https://github.com/linkshift/SpeakUP-Client/issues"
 	},
-	"homepage": "https://linksoft.cf/",
+	"homepage": "https://ptdev.pw/",
 	"dependencies": {
 		"electron-settings": "^1.0.0"
 	},

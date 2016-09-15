@@ -308,7 +308,7 @@ function createWindow() {
 	});
 	
 	if (os === 'win32') {
-		var updateFeed = 'https://speakup.cf/client/squirrel';
+		var updateFeed = 'https://speakup.ptdev.pw/client/squirrel';
 		autoUpdater.setFeedURL(updateFeed + '?v=' + package_json.version + '&os=' + os);
 		
 		autoUpdater
@@ -379,7 +379,7 @@ ipcMain.on('online-status-changed', function(event, status) {
 				break;
 			}
 		}
-		//mainWindow.loadURL('https://speakup.cf/' + room, BrowserOptions);
+		//mainWindow.loadURL('https://speakup.ptdev.pw/' + room, BrowserOptions);
 		mainWindow.loadURL('file://' + __dirname + '/frame.html?room=' + room, BrowserOptions);
 	} else {
 		mainWindow.loadURL('file://' + __dirname + '/no-connection.html');
